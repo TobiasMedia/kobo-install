@@ -978,7 +978,7 @@ class Config:
                         if username != "":
                             content = "{cr}{username}\t{db}".format(
                                 cr="\n" if content else "",
-                                user=username,
+                                username=username,
                                 db=db
                             )
 
@@ -1059,7 +1059,7 @@ class Config:
             # `content` will be read by MongoDB container at next boot
             # It should always contain previous username and a boolean for deletion.
             # Its format should be: `<user><TAB><boolean>`
-            content = '{username}   false'.format(postgres_user)
+            content = '{username}   false'.format(username=postgres_user)
 
             if postgres_user != self.__config.get("postgres_user"):
 
@@ -1075,7 +1075,7 @@ class Config:
                 delete_user = CLI.get_response([Config.TRUE, Config.FALSE], Config.TRUE)
 
                 if delete_user == Config.TRUE:
-                    content = '{username}   true'.format(postgres_user)
+                    content = '{username}   true'.format(username=postgres_user)
                     CLI.colored_print("╔══════════════════════════════════════════════════════╗",
                                       CLI.COLOR_WARNING)
                     CLI.colored_print("║ WARNING! `{}` cannot be deleted if it has been used  ║".format(postgres_user),
